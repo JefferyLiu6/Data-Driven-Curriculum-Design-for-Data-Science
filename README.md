@@ -47,14 +47,6 @@ This project focuses on:
 3. **Clustering Visualizations**: Dendrograms and PCA scatterplots demonstrate skill groupings.
 4. **Location Trends**: Bar charts show demand by region, emphasizing Toronto and remote roles.
 
-### Final Curriculum
-A structured 10-course learning journey:
-1. **Programming Foundations**: Python, R, SQL, and Pandas.
-2. **Data Visualization**: Tableau, Power BI, and advanced libraries.
-3. **Machine Learning & AI**: TensorFlow, PyTorch, and Scikit-learn.
-4. **Big Data & Cloud**: Hadoop, Spark, and AWS.
-5. **Soft Skills and Ethics**: Teamwork, critical thinking, and data governance.
-
 ---
 
 ## Tools & Technologies 🛠️
