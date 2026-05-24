@@ -1,7 +1,3 @@
-<p align="center">
-  <img src="assets/project-banner.png" alt="Job postings transformed into a data science curriculum through analytical modeling" width="100%">
-</p>
-
 # Designing a Data Science Curriculum from Job-Market Signals
 
 > An evidence-led curriculum design study using skills extracted from 1,276 Canadian and remote data-related job postings.
