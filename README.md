@@ -1,85 +1,149 @@
-# Bridging the Gap: Industry-Driven Data Science Curriculum Design 📘💻
+<p align="center">
+  <img src="assets/project-banner.png" alt="Job postings transformed into a data science curriculum through analytical modeling" width="100%">
+</p>
 
-## Context 🌟
-With the rapid growth of the data science field, aligning academic programs with industry needs is essential. Employers seek a blend of technical, analytical, and interpersonal skills, but traditional curriculums often fail to meet these evolving demands. This project addresses the challenge by analyzing job postings to identify critical skills and employing clustering techniques to design an actionable, industry-aligned curriculum.
+# Designing a Data Science Curriculum from Job-Market Signals
 
----
+> An evidence-led curriculum design study using skills extracted from 1,276 Canadian and remote data-related job postings.
 
-## Problem Statement 🧩
-**How can we design a data science curriculum that aligns with the ever-evolving demands of the job market while providing students with a clear and logical pathway for skill acquisition?**
+## Executive Summary
 
----
+| Dimension | Description |
+| --- | --- |
+| Decision question | Which employer-mentioned skills should inform a coherent data science learning pathway? |
+| Dataset | 1,276 scraped postings with job title, company, location, salary, description, and source-link fields |
+| Analytical approach | Keyword feature engineering, exploratory analysis, co-occurrence analysis, hierarchical clustering, K-means, and PCA visualization |
+| Deliverable | A manually interpreted ten-course curriculum prototype grounded in observed skill signals |
+| Technology | Python, pandas, NumPy, SciPy, scikit-learn, Matplotlib, Seaborn, and Jupyter |
 
-## Objective 🎯
-This project focuses on:
-1. Analyzing job postings for data-related roles to identify high-demand skills.
-2. Grouping these skills into meaningful clusters using clustering techniques.
-3. Creating a structured, industry-relevant curriculum for aspiring data professionals.
+This project converts unstructured job descriptions into an interpretable skill matrix, examines demand and relationship patterns, and uses unsupervised learning to inform curriculum structure. The output is decision support for academic design, not a claim that market frequency alone determines what students should learn.
 
----
+## Headline Findings
 
-## Methodology 🚀
+| Finding | Evidence from the audited sample | Design implication |
+| --- | ---: | --- |
+| Querying and programming are foundational signals | `SQL` appears in 518 postings (40.6%); `Python` in 508 (39.8%) | Begin with programming, querying, and data manipulation foundations |
+| Communication is not secondary to technical work | `Communication Skills` appears in 462 postings (36.2%) | Integrate reporting and stakeholder practice across technical courses |
+| Applied modeling has material demand | `Machine Learning` appears in 349 postings (27.4%) | Progress from statistics and feature work into modeling and applied AI |
+| Business tooling remains visible | `Excel`, `Power BI`, and `Data Analytics` occur among high-frequency terms | Include analytics delivery and business intelligence in the pathway |
 
-### 1. Job Posting Analysis
-- **Data Collection**: Scraped 1,276 job postings from Canadian and remote locations, surpassing the target of 800. Anti-bot measures were addressed with custom scripts.
-- **Preprocessing**: Removed duplicates, standardized text, and prepared a clean dataset for analysis.
+<p align="center">
+  <img src="assets/top-skill-mentions.png" alt="Bar chart of the ten most frequently mentioned skills in the audited postings" width="92%">
+</p>
 
-### 2. Skill Extraction
-- **Text Analysis**: Combined job descriptions into a single corpus and extracted unigrams and bigrams using `CountVectorizer`.
-- **Skill Validation**: Enhanced the extracted skills using AI-powered validation via ChatGPT to ensure relevance and eliminate noise.
+**Metric definition.** The chart uses case-insensitive, boundary-aware matching for the project's predefined skill terms. A mention indicates that a keyword occurs in a description; it does not establish required proficiency, hiring importance, or causal labor-market demand.
 
-### 3. Clustering
-- **Hierarchical Clustering**: Used cosine similarity and centroid linkage to form distinct skill clusters.
-- **K-Means Clustering**: Applied the Elbow Method to identify optimal cluster numbers and validate groupings.
-- **Comparison**: Evaluated hierarchical vs. K-Means clustering for curriculum design, balancing granularity and coherence.
+## Analytical Workflow
 
-### 4. Curriculum Design
-- **Skill-Based Courses**: Developed a 10-course curriculum based on skill clusters, ensuring logical progression and minimal redundancy.
-- **Industry Relevance**: Included foundational programming, advanced machine learning, big data tools, and business intelligence skills.
-
----
-
-## Deliverables 📦
-
-### Visual Insights
-1. **Skill Frequency Bar Chart**: Highlights in-demand skills like Python, SQL, and Tableau.
-2. **Co-occurrence Heatmap**: Illustrates relationships between top skills for cohesive curriculum design.
-3. **Clustering Visualizations**: Dendrograms and PCA scatterplots demonstrate skill groupings.
-4. **Location Trends**: Bar charts show demand by region, emphasizing Toronto and remote roles.
-
----
-
-## Tools & Technologies 🛠️
-- **Programming**: Python
-- **Libraries**: NumPy, Pandas, Matplotlib, Seaborn, Scikit-learn
-- **Clustering**: Hierarchical Clustering, K-Means
-- **Skill Validation**: ChatGPT API
-
----
-
-## Outcomes 📈
-This project bridges the gap between academic preparation and industry expectations by providing:
-1. A comprehensive guide for curriculum developers.
-2. Insights for job seekers to align their skills with market demands.
-3. A balanced blueprint for data science education, integrating technical, analytical, and interpersonal skills.
-
----
-
-## Repository Structure 📂
-```plaintext
-├── DataScience_CurriculumDesign.ipynb  # Notebook with clustering and curriculum design
-├── webscraping_results.csv             # Scraped job postings dataset
-├── curriculum_report.pdf               # Detailed report with visualizations and curriculum details
-├── README.md                           # Project overview
+```mermaid
+flowchart LR
+    A["Raw postings<br/>1,276 records"] --> B["Description text<br/>and 52 skill terms"]
+    B --> C["Posting-by-skill<br/>indicator matrix"]
+    C --> D["Frequency and<br/>co-occurrence audit"]
+    C --> E["Hierarchical<br/>clustering"]
+    C --> F["Engineered skill features<br/>and K-means"]
+    F --> G["PCA cluster<br/>visualization"]
+    D --> H["Curriculum<br/>prototype"]
+    E --> H
+    G --> H
 ```
----
 
-## Next Steps 🧭
+## Methodology
 
-Enhance Dataset: Expand analysis to global job postings for broader insights.
-Advanced Models: Experiment with more sophisticated clustering techniques, like DBSCAN.
-Curriculum Feedback: Validate the proposed curriculum with industry experts and educators.
+| Stage | Implementation | Analytical output |
+| --- | --- | --- |
+| Data preparation | Load posting records and retain descriptive fields required for analysis | Auditable raw sample and data-quality profile |
+| Skill extraction | Map descriptions to 52 predefined technical, analytical, business, and professional skill terms | Binary posting-by-skill matrix |
+| Exploration | Aggregate mentions, locations, skill breadth, and skill co-occurrences | Demand signals and candidate skill relationships |
+| Hierarchical clustering | Compare skill occurrence profiles using cosine-distance-based clustering | Dendrogram for exploratory module grouping |
+| K-means profiling | Cluster engineered skill-level features and visualize in two dimensions with PCA | Alternative grouping lens for curriculum interpretation |
+| Curriculum synthesis | Review statistical groupings and arrange skill areas into a teachable sequence | Ten-course curriculum prototype |
 
----
+## Curriculum Prototype
 
-Feel free to explore and collaborate on this project! Contributions are welcome to enhance the analysis and design further. 🚀✨
+The proposed sequence is deliberately curated after clustering: statistical similarity can reveal patterns, but prerequisites, learning progression, and responsible practice require human judgment.
+
+| Course | Theme | Representative coverage |
+| ---: | --- | --- |
+| 1 | Programming and Query Foundations | Python, R, Java, SQL, pandas, NumPy |
+| 2 | Analytics and Visualization | Data analytics, Matplotlib, Seaborn, Tableau, Power BI |
+| 3 | Machine Learning Foundations | Machine learning, scikit-learn, deep learning, TensorFlow, PyTorch |
+| 4 | Cloud and Large-Scale Data | Hadoop, Spark, Kubernetes, AWS, Azure, GCP, BigQuery |
+| 5 | Data Engineering | ETL, Airflow, relational databases, data wrangling, feature engineering |
+| 6 | Advanced Analytical Applications | NLP, computer vision, statistical modeling, hypothesis testing |
+| 7 | Business Intelligence and Stakeholders | BI tooling, stakeholder communication, strategic thinking, collaboration |
+| 8 | Analytical Problem Solving | Decision making, critical thinking, creativity, adaptability |
+| 9 | Delivery and Team Practice | Cross-functional delivery, Agile, Scrum, teamwork, time management |
+| 10 | Governance and Professional Practice | Data governance, independent work, ethical decision-making |
+
+## Data Audit
+
+The included source file is sufficiently complete for description-based skill exploration, but it is not a normalized labor-market panel.
+
+| Quality check | Result |
+| --- | ---: |
+| Job-posting records | 1,276 |
+| Source fields | 8 |
+| Exact duplicate rows | 0 |
+| Duplicate posting links | 0 |
+| Missing job descriptions | 0 |
+| Records with salary text | 252 (19.7%) |
+
+| Most common location labels | Postings |
+| --- | ---: |
+| Toronto, ON | 141 |
+| Remote | 127 |
+| Hybrid work in Toronto, ON | 87 |
+| Vancouver, BC | 44 |
+| Montr&eacute;al, QC | 39 |
+
+Locations are retained as scraped. Remote, hybrid, and city-level values therefore should not be aggregated into regional conclusions without additional standardization.
+
+## Visual Evidence
+
+The dendrogram documents the exploratory hierarchical-clustering stage and the selected distance cut used when reviewing possible skill groupings.
+
+<p align="center">
+  <img src="dendrogram_cut.png" alt="Hierarchical clustering dendrogram with selected distance cut" width="72%">
+</p>
+
+The clustering output is a diagnostic input to curriculum design, not a validated course taxonomy.
+
+## Repository Contents
+
+| Path | Purpose |
+| --- | --- |
+| `DataScience_CurriculumDesign.ipynb` | Notebook containing extraction, exploration, clustering, PCA, and curriculum-design work |
+| `webscraping_results.csv` | Raw job-posting records analyzed by the notebook |
+| `dendrogram.png` | Full hierarchical-clustering dendrogram |
+| `dendrogram_cut.png` | Dendrogram annotated with the selected distance threshold |
+| `assets/project-banner.png` | Project header visual |
+| `assets/top-skill-mentions.png` | Boundary-aware audit of the most frequently mentioned skills |
+
+## Reproduce the Analysis
+
+The notebook reads `webscraping_results.csv` from the repository root and writes `Processed_Job_Postings.csv` when the preprocessing/export cells are executed.
+
+```bash
+git clone https://github.com/JefferyLiu6/Data-Driven-Curriculum-Design-for-Data-Science.git
+cd Data-Driven-Curriculum-Design-for-Data-Science
+python -m venv .venv
+source .venv/bin/activate
+pip install jupyter pandas numpy scipy scikit-learn matplotlib seaborn
+jupyter lab DataScience_CurriculumDesign.ipynb
+```
+
+The notebook contains inert, triple-quoted OpenAI example snippets for narrative experimentation; these are not required for the core analytical workflow and do not run during normal execution.
+
+## Limitations and Improvements
+
+| Limitation | Why it matters | Recommended improvement |
+| --- | --- | --- |
+| Notebook extraction uses raw substring matching; for example, `R` is flagged in all 1,276 saved descriptions while the boundary-aware README audit identifies 206. | Short terms can substantially inflate frequencies and distort clustering. | Replace extraction with validated boundary-aware patterns or a skill-entity matcher, then regenerate downstream outputs. |
+| The hierarchical-clustering implementation supplies a square distance matrix to `linkage`, which produces a `ClusterWarning`. | The resulting hierarchy should not be treated as methodologically finalized. | Cluster from a condensed distance vector or validated feature matrix and assess stability across linkage choices. |
+| Locations are unnormalized and salary text is available for only 252 records. | Geographic and compensation conclusions would be unreliable. | Normalize location and compensation fields and repeat collection across time periods. |
+| Course structure includes manual interpretation after clustering. | The result is a reasoned prototype rather than an evaluated curriculum. | Validate with instructors, employers, and learner-outcome evidence. |
+
+## Competencies Demonstrated
+
+`Python` `pandas` `Text Feature Engineering` `Exploratory Data Analysis` `Data Visualization` `Hierarchical Clustering` `K-Means` `PCA` `Analytical Communication` `Responsible Interpretation`
